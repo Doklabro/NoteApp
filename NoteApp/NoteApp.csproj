@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Categoriesed.cs" />
     <Compile Include="Note.cs" />
     <Compile Include="NoteCategories.cs" />
     <Compile Include="Paths.cs" />
