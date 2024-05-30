@@ -27,6 +27,10 @@ namespace NoteAppUI
         /// </summary>
         private List<Note> Notes { get; set; }
 
+        private Note CurrentNote { get; set; }
+
+        private List<Note> ListCurrentNote { get; set; }
+
         /// <summary>
         /// Список контактов по категории
         /// </summary>
@@ -42,9 +46,23 @@ namespace NoteAppUI
             ShowCategoryCombo.Items.Add(NoteCategories.ЗдоровьеИСпорт);
             ShowCategoryCombo.Items.Add(NoteCategories.Дом);
             ShowCategoryCombo.Items.Add(NoteCategories.Финансы);
+            ShowCategoryCombo.Items.Add("All");
             var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "notes.json");
             Notes = ProjectManager.LoadFromFile(path);
-            UpdateNotes(Notes);
+            CategoriesedNotes = Categoriesed.CategoriesedNotes(Notes);
+            UpdateNotes(CategoriesedNotes);
+            ShowCategoryCombo.Text = "All";
+            path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "current.json");
+            ListCurrentNote = ProjectManager.LoadFromFile(path);
+            try
+            {
+                CurrentNote = ListCurrentNote[0];
+                UpdateNoteInformation(ListCurrentNote[0]);
+            }
+            catch
+            {
+
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -91,7 +109,7 @@ namespace NoteAppUI
                 Notes.Add(TransferNote.Data);
                 var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "notes.json");
                 ProjectManager.SaveToFile(Notes, path);
-                UpdateNotes(Notes);
+                UpdateNotes(CategoriesedNotes);
             }
         }
 
@@ -130,19 +148,10 @@ namespace NoteAppUI
         private void NotesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var index = NotesListBox.SelectedIndex;
-            if (ShowCategoryCombo.Text == string.Empty)
+            if (index >= 0)
             {
-                if (index >= 0)
-                {
-                    UpdateNoteInformation(Notes[index]);
-                }
-            }
-            else
-            {
-                if (index >= 0)
-                {
-                    UpdateNoteInformation(CategoriesedNotes[index]);
-                }
+                UpdateNoteInformation(CategoriesedNotes[index]);
+                CurrentNote = CategoriesedNotes[index];
             }
         }
 
@@ -156,7 +165,7 @@ namespace NoteAppUI
             var index = NotesListBox.SelectedIndex;
             if (index >= 0)
             {
-                dateTimePickerCreated.Value = Notes[index].Created;
+                dateTimePickerCreated.Value = CategoriesedNotes[index].Created;
             }
             else
             {
@@ -174,7 +183,7 @@ namespace NoteAppUI
             var index = NotesListBox.SelectedIndex;
             if (index >= 0)
             {
-                dateTimePickerModified.Value = Notes[index].LastUpdated;
+                dateTimePickerModified.Value = CategoriesedNotes[index].LastUpdated;
             }
             else
             {
@@ -200,7 +209,7 @@ namespace NoteAppUI
                     Notes[index] = TransferNote.Data;
                     var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "notes.json");
                     ProjectManager.SaveToFile(Notes, path);
-                    UpdateNotes(Notes);
+                    UpdateNotes(CategoriesedNotes);
                     NotesListBox.SelectedIndex = index;
                 }
             }
@@ -231,7 +240,7 @@ namespace NoteAppUI
                     Notes.RemoveAt(index);
                     var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "notes.json");
                     ProjectManager.SaveToFile(Notes, path);
-                    UpdateNotes(Notes);
+                    UpdateNotes(CategoriesedNotes);
                     NotesListBox.SelectedIndex = -1;
                     labelName.Text = String.Empty;
                     labelCurentCategory.Text = String.Empty;
@@ -239,6 +248,9 @@ namespace NoteAppUI
                     dateTimePickerModified.Value = DateTime.Now;
                     textBoxText.Text = String.Empty;
                 }
+                var path2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "current.json");
+                File.Delete(path2);
+                CurrentNote = null;
             }
             else
             {
@@ -256,9 +268,10 @@ namespace NoteAppUI
         private void ShowCategoryCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             var mask = ShowCategoryCombo.Text;
-            if (mask == string.Empty)
+            if (mask == "All")
             {
-                UpdateNotes(Notes);
+                CategoriesedNotes = Categoriesed.CategoriesedNotes(Notes);
+                UpdateNotes(CategoriesedNotes);
             }
             else
             {
@@ -270,6 +283,14 @@ namespace NoteAppUI
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            List<Note> currentNote = new List<Note>();
+            currentNote.Add(CurrentNote);
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "current.json");
+            ProjectManager.SaveToFile(currentNote, path);
         }
     }
 }

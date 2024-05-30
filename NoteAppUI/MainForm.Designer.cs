@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.DeleteNote = new System.Windows.Forms.Button();
+            this.EditNote = new System.Windows.Forms.Button();
+            this.AddNote = new System.Windows.Forms.Button();
             this.ShowCategoryCombo = new System.Windows.Forms.ComboBox();
             this.NotesListBox = new System.Windows.Forms.ListBox();
             this.showCategoryLabel = new System.Windows.Forms.Label();
@@ -50,9 +53,6 @@
             this.removeNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.DeleteNote = new System.Windows.Forms.Button();
-            this.EditNote = new System.Windows.Forms.Button();
-            this.AddNote = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -70,6 +70,38 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(375, 837);
             this.panel1.TabIndex = 0;
+            // 
+            // DeleteNote
+            // 
+            this.DeleteNote.Image = global::NoteAppUI.Properties.Resources.DeleteContactIconContrast_512x512;
+            this.DeleteNote.Location = new System.Drawing.Point(140, 766);
+            this.DeleteNote.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.DeleteNote.Name = "DeleteNote";
+            this.DeleteNote.Size = new System.Drawing.Size(58, 66);
+            this.DeleteNote.TabIndex = 0;
+            this.DeleteNote.UseVisualStyleBackColor = true;
+            this.DeleteNote.Click += new System.EventHandler(this.DeleteNote_Click);
+            // 
+            // EditNote
+            // 
+            this.EditNote.Image = global::NoteAppUI.Properties.Resources.EditContactIconContrast_512x512;
+            this.EditNote.Location = new System.Drawing.Point(70, 766);
+            this.EditNote.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.EditNote.Name = "EditNote";
+            this.EditNote.Size = new System.Drawing.Size(60, 66);
+            this.EditNote.TabIndex = 0;
+            this.EditNote.UseVisualStyleBackColor = true;
+            this.EditNote.Click += new System.EventHandler(this.EditNote_Click);
+            // 
+            // AddNote
+            // 
+            this.AddNote.Image = global::NoteAppUI.Properties.Resources.AddContactIconContrast_512x512;
+            this.AddNote.Location = new System.Drawing.Point(3, 765);
+            this.AddNote.Name = "AddNote";
+            this.AddNote.Size = new System.Drawing.Size(62, 68);
+            this.AddNote.TabIndex = 0;
+            this.AddNote.UseVisualStyleBackColor = true;
+            this.AddNote.Click += new System.EventHandler(this.AddNote_Click);
             // 
             // ShowCategoryCombo
             // 
@@ -102,7 +134,6 @@
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.textBoxText);
             this.panel2.Controls.Add(this.dateTimePickerModified);
             this.panel2.Controls.Add(this.dateTimePickerCreated);
@@ -212,7 +243,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1233, 36);
+            this.menuStrip1.Size = new System.Drawing.Size(1233, 33);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -221,7 +252,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(54, 32);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(54, 29);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // exitToolStripMenuItem
@@ -239,27 +270,28 @@
             this.editNoteToolStripMenuItem,
             this.removeNoteToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(58, 32);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(58, 29);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // addNoteToolStripMenuItem
             // 
             this.addNoteToolStripMenuItem.Name = "addNoteToolStripMenuItem";
-            this.addNoteToolStripMenuItem.Size = new System.Drawing.Size(217, 34);
+            this.addNoteToolStripMenuItem.Size = new System.Drawing.Size(286, 34);
             this.addNoteToolStripMenuItem.Text = "AddNote";
             this.addNoteToolStripMenuItem.Click += new System.EventHandler(this.AddNote_Click);
             // 
             // editNoteToolStripMenuItem
             // 
             this.editNoteToolStripMenuItem.Name = "editNoteToolStripMenuItem";
-            this.editNoteToolStripMenuItem.Size = new System.Drawing.Size(217, 34);
+            this.editNoteToolStripMenuItem.Size = new System.Drawing.Size(286, 34);
             this.editNoteToolStripMenuItem.Text = "EditNote";
             this.editNoteToolStripMenuItem.Click += new System.EventHandler(this.EditNote_Click);
             // 
             // removeNoteToolStripMenuItem
             // 
             this.removeNoteToolStripMenuItem.Name = "removeNoteToolStripMenuItem";
-            this.removeNoteToolStripMenuItem.Size = new System.Drawing.Size(217, 34);
+            this.removeNoteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.removeNoteToolStripMenuItem.Size = new System.Drawing.Size(286, 34);
             this.removeNoteToolStripMenuItem.Text = "RemoveNote";
             this.removeNoteToolStripMenuItem.Click += new System.EventHandler(this.DeleteNote_Click);
             // 
@@ -268,7 +300,7 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem1});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(65, 32);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
             this.helpToolStripMenuItem.Text = "Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -279,38 +311,6 @@
             this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(207, 34);
             this.aboutToolStripMenuItem1.Text = "About...";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
-            // 
-            // DeleteNote
-            // 
-            this.DeleteNote.Image = global::NoteAppUI.Properties.Resources.DeleteContactIconContrast_512x512;
-            this.DeleteNote.Location = new System.Drawing.Point(140, 766);
-            this.DeleteNote.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.DeleteNote.Name = "DeleteNote";
-            this.DeleteNote.Size = new System.Drawing.Size(58, 66);
-            this.DeleteNote.TabIndex = 0;
-            this.DeleteNote.UseVisualStyleBackColor = true;
-            this.DeleteNote.Click += new System.EventHandler(this.DeleteNote_Click);
-            // 
-            // EditNote
-            // 
-            this.EditNote.Image = global::NoteAppUI.Properties.Resources.EditContactIconContrast_512x512;
-            this.EditNote.Location = new System.Drawing.Point(70, 766);
-            this.EditNote.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.EditNote.Name = "EditNote";
-            this.EditNote.Size = new System.Drawing.Size(60, 66);
-            this.EditNote.TabIndex = 0;
-            this.EditNote.UseVisualStyleBackColor = true;
-            this.EditNote.Click += new System.EventHandler(this.EditNote_Click);
-            // 
-            // AddNote
-            // 
-            this.AddNote.Image = global::NoteAppUI.Properties.Resources.AddContactIconContrast_512x512;
-            this.AddNote.Location = new System.Drawing.Point(3, 765);
-            this.AddNote.Name = "AddNote";
-            this.AddNote.Size = new System.Drawing.Size(62, 68);
-            this.AddNote.TabIndex = 0;
-            this.AddNote.UseVisualStyleBackColor = true;
-            this.AddNote.Click += new System.EventHandler(this.AddNote_Click);
             // 
             // MainForm
             // 
@@ -323,6 +323,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Заметки";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

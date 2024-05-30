@@ -216,5 +216,15 @@ namespace NoteAppUI
             TextTextBox.BackColor = Color.White;
             TryUnlockCreateButton();
         }
+
+        private void OKButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddEditNoteForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

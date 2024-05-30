@@ -133,7 +133,7 @@
             // 
             this.CancelButton.Location = new System.Drawing.Point(33, 415);
             this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(75, 23);
+            this.CancelButton.Size = new System.Drawing.Size(75, 39);
             this.CancelButton.TabIndex = 10;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
@@ -144,16 +144,17 @@
             this.OKButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.OKButton.Location = new System.Drawing.Point(713, 415);
             this.OKButton.Name = "OKButton";
-            this.OKButton.Size = new System.Drawing.Size(75, 23);
+            this.OKButton.Size = new System.Drawing.Size(75, 39);
             this.OKButton.TabIndex = 11;
             this.OKButton.Text = "OK";
             this.OKButton.UseVisualStyleBackColor = true;
+            this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
             // 
             // AddEditNoteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 466);
             this.Controls.Add(this.OKButton);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.dateTimePickerModified);
@@ -168,6 +169,7 @@
             this.Controls.Add(this.label1);
             this.Name = "AddEditNoteForm";
             this.Text = "EditNoteForm";
+            this.Load += new System.EventHandler(this.AddEditNoteForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
